@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Register for VU LMS deadline push notifications — get alerted for assignments, quizzes, and GDBs automatically.">
+  <title>VU LMS Deadline Notifier — Setup</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icons/icon48.png">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset ──────────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #0d1117;
+      --bg-panel:  #161b22;
+      --bg-glass:  rgba(255,255,255,0.04);
+      --border:    rgba(255,255,255,0.09);
+      --accent:    #60a5fa;
+      --accent-h:  #93c5fd;
+      --safe:      #22c55e;
+      --warn:      #f59e0b;
+      --critical:  #ef4444;
+      --text:      #e6edf3;
+      --text-2:    #8b949e;
+      --text-3:    #484f58;
+      --radius:    14px;
+      --radius-sm: 8px;
+      font-family: 'Inter', system-ui, sans-serif;
+      color-scheme: dark;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px 64px;
+    }
+
+    /* ── Hero ────────────────────────────────────────────────────────────── */
+    .hero {
+      text-align: center;
+      max-width: 540px;
+      margin-bottom: 36px;
+    }
+    .hero-icon {
+      font-size: 52px;
+      line-height: 1;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 0 20px rgba(96,165,250,0.4));
+    }
+    .hero h1 {
+      font-size: clamp(22px, 5vw, 30px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #e6edf3, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      font-size: 15px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    /* ── How it works ────────────────────────────────────────────────────── */
+    .how-it-works {
+      display: flex;
+      gap: 12px;
+      max-width: 580px;
+      width: 100%;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .step {
+      flex: 1;
+      min-width: 140px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 14px;
+      text-align: center;
+    }
+    .step-icon  { font-size: 24px; margin-bottom: 8px; }
+    .step-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .step-desc  { font-size: 11px; color: var(--text-2); line-height: 1.5; }
+
+    /* ── Card ────────────────────────────────────────────────────────────── */
+    .card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ── Form ────────────────────────────────────────────────────────────── */
+    .form-group { margin-bottom: 16px; }
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 7px;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      background: var(--bg-glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14px;
+      padding: 11px 14px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input:focus {
+      border-color: rgba(96,165,250,0.5);
+      box-shadow: 0 0 0 3px rgba(96,165,250,0.12);
+    }
+    input::placeholder { color: var(--text-3); }
+
+    /* ── Consent box ─────────────────────────────────────────────────────── */
+    .consent-box {
+      background: rgba(96,165,250,0.06);
+      border: 1px solid rgba(96,165,250,0.2);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      font-size: 12px;
+      color: var(--text-2);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .consent-box strong { color: var(--text); }
+    .consent-box a { color: var(--accent); text-decoration: none; }
+    .consent-box a:hover { text-decoration: underline; }
+
+    /* ── Submit button ───────────────────────────────────────────────────── */
+    .btn-primary {
+      width: 100%;
+      background: var(--accent);
+      color: #0d1117;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 13px 20px;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+      letter-spacing: 0.02em;
+    }
+    .btn-primary:hover   { background: var(--accent-h); box-shadow: 0 0 20px rgba(96,165,250,0.4); }
+    .btn-primary:active  { transform: scale(0.98); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── Delete link ─────────────────────────────────────────────────────── */
+    .delete-section {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .delete-section p { font-size: 12px; color: var(--text-2); margin-bottom: 10px; }
+    .btn-danger {
+      background: transparent;
+      border: 1px solid rgba(239,68,68,0.4);
+      border-radius: var(--radius-sm);
+      color: var(--critical);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 9px 16px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-danger:hover { background: rgba(239,68,68,0.08); border-color: var(--critical); }
+
+    /* ── Status messages ─────────────────────────────────────────────────── */
+    .status-msg {
+      display: none;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+    .status-msg.visible { display: block; }
+    .status-msg.success { background: rgba(34,197,94,0.1);  color: var(--safe);     border: 1px solid rgba(34,197,94,0.3);  }
+    .status-msg.error   { background: rgba(239,68,68,0.08); color: var(--critical); border: 1px solid rgba(239,68,68,0.25); }
+    .status-msg.info    { background: rgba(96,165,250,0.08); color: var(--accent);  border: 1px solid rgba(96,165,250,0.25); }
+
+    /* ── Footer ──────────────────────────────────────────────────────────── */
+    footer {
+      margin-top: 40px;
+      font-size: 11px;
+      color: var(--text-3);
+      text-align: center;
+      line-height: 1.7;
+    }
+    footer a { color: var(--text-2); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+
+  <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+  <div class="hero">
+    <div class="hero-icon">🔔</div>
+    <h1>VU LMS Deadline Notifier</h1>
+    <p>Never miss an assignment, quiz, or GDB again. We'll check the LMS automatically and send you escalating push notifications until you submit — or the deadline passes.</p>
+  </div>
+
+  <!-- ── How it works ──────────────────────────────────────────────────── -->
+  <div class="how-it-works" role="list" aria-label="How it works">
+    <div class="step" role="listitem">
+      <div class="step-icon">🔐</div>
+      <div class="step-title">Secure Login</div>
+      <div class="step-desc">Your VU credentials are encrypted with AES-256 before storage. Never stored in plain text.</div>
+    </div>
+    <div class="step" role="listitem">
+      <div class="step-icon">🤖</div>
+      <div class="step-title">Auto-Check</div>
+      <div class="step-desc">Our server checks the LMS twice daily on your behalf using your session.</div>
+    </div>
+    <div class="step" role="listitem">
+      <div class="step-icon">📲</div>
+      <div class="step-title">Push Alerts</div>
+      <div class="step-desc">Notifications escalate — every 24h, then 6h, then 2h, then every 30 min in the final stretch.</div>
+    </div>
+  </div>
+
+  <!-- ── Registration Card ─────────────────────────────────────────────── -->
+  <div class="card" role="main">
+    <div class="card-title">
+      <span>✏️</span> Register Your Device
+    </div>
+
+    <form id="register-form" novalidate>
+      <div class="form-group">
+        <label for="student-id">VU Student ID</label>
+        <input
+          type="text"
+          id="student-id"
+          name="studentId"
+          placeholder="e.g. BC220400123"
+          maxlength="12"
+          autocomplete="username"
+          required
+          aria-describedby="id-hint"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="password">LMS Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Your VU LMS password"
+          maxlength="15"
+          autocomplete="current-password"
+          required
+        >
+      </div>
+
+      <div class="consent-box" role="note">
+        <strong>What we store and why:</strong><br>
+        Your student ID and password are encrypted with AES-256-GCM and stored
+        on a private server. They are used <em>only</em> to log into VULMS on
+        your behalf and check for new deadlines. They are never shared with
+        anyone and never sent in plain text. You can
+        <a href="#delete-section">delete your account</a> at any time.
+        <br><br>
+        <strong>This is for a small group of students (≤5) and is not an
+        official VU service.</strong>
+      </div>
+
+      <button type="submit" class="btn-primary" id="submit-btn">
+        Enable Notifications
+      </button>
+    </form>
+
+    <div class="status-msg" id="status-msg" role="alert" aria-live="polite"></div>
+
+    <!-- ── Delete Account ─────────────────────────────────────────────── -->
+    <div class="delete-section" id="delete-section">
+      <p>Want to remove your data? Enter your student ID below and click Delete.</p>
+      <div class="form-group">
+        <label for="delete-id">Student ID to delete</label>
+        <input
+          type="text"
+          id="delete-id"
+          placeholder="e.g. BC220400123"
+          maxlength="12"
+          autocomplete="off"
+        >
+      </div>
+      <button class="btn-danger" id="delete-btn" type="button">
+        🗑 Delete My Account &amp; Data
+      </button>
+      <div class="status-msg" id="delete-status-msg" role="alert" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Not an official Virtual University service &nbsp;·&nbsp; For personal use by a small group of students</p>
+    <p style="margin-top:4px">
+      Push notifications require a modern browser (Chrome, Edge, Firefox, Samsung Internet).
+      iOS Safari requires iOS 16.4+ and adding this page to your Home Screen.
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

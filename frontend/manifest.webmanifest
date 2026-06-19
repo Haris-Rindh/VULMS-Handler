@@ -1,0 +1,13 @@
+{
+  "name": "VU LMS Deadline Notifier",
+  "short_name": "VU Notifier",
+  "description": "Get push notifications for VU LMS assignments, quizzes, and GDBs before deadlines.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#60a5fa",
+  "icons": [
+    { "src": "/icons/icon192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

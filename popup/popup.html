@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VU LMS Deadline Notifier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────────────────────── -->
+  <header class="header">
+    <img src="../icons/icon48.png" alt="VU Notifier" class="header-logo">
+    <div class="header-title">
+      VU Deadline Notifier
+      <div class="header-subtitle">Track assignments, quizzes &amp; GDBs</div>
+    </div>
+    <span id="badge-count" class="badge-count hidden">0</span>
+    <button class="btn-options" id="btn-options" title="Open Settings">⚙️</button>
+  </header>
+
+  <!-- ── Filter Tabs ─────────────────────────────────────────────────────── -->
+  <nav class="filter-tabs" role="tablist">
+    <button class="tab active" data-filter="all"        role="tab" aria-selected="true">All</button>
+    <button class="tab"        data-filter="assignment"  role="tab">📝 Assignments</button>
+    <button class="tab"        data-filter="quiz"        role="tab">📋 Quizzes</button>
+    <button class="tab"        data-filter="gdb"         role="tab">💬 GDBs</button>
+  </nav>
+
+  <!-- ── Item List ───────────────────────────────────────────────────────── -->
+  <main class="scroll-area" id="item-list" role="list" aria-label="Pending deadlines">
+    <!-- Cards are injected by popup.js -->
+    <div class="empty-state" id="empty-state" style="display:none">
+      <div class="empty-icon">🎉</div>
+      <div class="empty-title">You're all caught up!</div>
+      <div class="empty-sub">No pending assignments, quizzes, or GDBs detected. Visit the VU LMS to refresh.</div>
+    </div>
+    <div class="empty-state" id="loading-state">
+      <div class="empty-icon">🔄</div>
+      <div class="empty-title">Loading deadlines…</div>
+      <div class="empty-sub">Opening storage…</div>
+    </div>
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <span class="footer-text" id="last-checked">Last checked: —</span>
+    <a class="btn-open-lms" id="btn-open-lms" href="#" target="_blank">
+      Open LMS ↗
+    </a>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

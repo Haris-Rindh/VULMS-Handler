@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VU LMS Notifier — Settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- ── Header ──────────────────────────────────────────────────────────── -->
+  <header class="page-header">
+    <img src="../icons/icon48.png" alt="VU Notifier">
+    <div class="page-header-text">
+      <h1>Settings &amp; Preferences</h1>
+      <p>Configure how VU LMS Deadline Notifier monitors and alerts you.</p>
+    </div>
+  </header>
+
+  <!-- ── Notification Behavior ───────────────────────────────────────────── -->
+  <section class="settings-card" aria-label="Notification Behavior">
+    <div class="settings-card-header">
+      <span class="settings-card-icon">🔔</span>
+      <div>
+        <div class="settings-card-title">Notification Behavior</div>
+        <div class="settings-card-desc">Control how and when reminders are sent</div>
+      </div>
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-label">
+        <h3>Urgency Preset</h3>
+        <p>Normal: less frequent reminders. Aggressive: reminders every 3h / 15min at critical stage.</p>
+      </div>
+      <div class="preset-btns" id="preset-btns">
+        <button class="preset-btn active" data-preset="normal" id="preset-normal">Normal</button>
+        <button class="preset-btn aggressive" data-preset="aggressive" id="preset-aggressive">Aggressive</button>
+      </div>
+      <input type="hidden" id="preset-value" value="normal">
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-label">
+        <h3>LMS Check Interval</h3>
+        <p>How often (minutes) the background worker re-evaluates notification schedules.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <input type="number" id="check-interval" min="5" max="120" step="5" value="30" style="width:80px">
+        <span style="font-size:12px;color:var(--text-secondary)">min</span>
+      </div>
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-label">
+        <h3>Alert Sound</h3>
+        <p>Play a chime on critical notifications (deadline &lt; 6 hours).</p>
+      </div>
+      <label class="toggle-switch" aria-label="Toggle sound">
+        <input type="checkbox" id="sound-enabled" checked>
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+  </section>
+
+  <!-- ── Quiet Hours ──────────────────────────────────────────────────────── -->
+  <section class="settings-card" aria-label="Quiet Hours">
+    <div class="settings-card-header">
+      <span class="settings-card-icon">🌙</span>
+      <div>
+        <div class="settings-card-title">Quiet Hours</div>
+        <div class="settings-card-desc">Suppress non-critical reminders during sleep / study time. Deadlines &lt; 6h will still notify.</div>
+      </div>
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-label">
+        <h3>Enable Quiet Hours</h3>
+        <p>Silence reminders during the selected time window.</p>
+      </div>
+      <label class="toggle-switch" aria-label="Toggle quiet hours">
+        <input type="checkbox" id="quiet-hours-enabled" checked>
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-label">
+        <h3>Quiet Window</h3>
+        <p>Start and end time for the quiet period (24-hour).</p>
+      </div>
+      <div class="time-pair">
+        <input type="time" id="quiet-start" value="23:00">
+        <span>→</span>
+        <input type="time" id="quiet-end" value="07:00">
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Advanced: Custom Selectors ──────────────────────────────────────── -->
+  <section class="settings-card" aria-label="Custom DOM Selectors">
+    <div class="settings-card-header">
+      <span class="settings-card-icon">🔧</span>
+      <div>
+        <div class="settings-card-title">Custom DOM Selectors</div>
+        <div class="settings-card-desc">If VULMS changes its HTML layout, override the CSS selectors used to find items. Leave blank to use defaults.</div>
+      </div>
+    </div>
+
+    <div class="selector-grid">
+      <div class="selector-field">
+        <label for="sel-asgn-rows">Assignment Rows</label>
+        <input type="text" id="sel-asgn-rows" placeholder="e.g. table.AssignmentTable tr">
+      </div>
+      <div class="selector-field">
+        <label for="sel-asgn-title">Assignment Title</label>
+        <input type="text" id="sel-asgn-title" placeholder="e.g. td.title-col">
+      </div>
+      <div class="selector-field">
+        <label for="sel-asgn-dead">Assignment Deadline</label>
+        <input type="text" id="sel-asgn-dead" placeholder="e.g. td.date-col">
+      </div>
+      <div class="selector-field">
+        <label for="sel-asgn-status">Assignment Status</label>
+        <input type="text" id="sel-asgn-status" placeholder="e.g. td.status-col">
+      </div>
+      <div class="selector-field">
+        <label for="sel-quiz-rows">Quiz Rows</label>
+        <input type="text" id="sel-quiz-rows" placeholder="e.g. table.QuizTable tr">
+      </div>
+      <div class="selector-field">
+        <label for="sel-quiz-dead">Quiz Deadline</label>
+        <input type="text" id="sel-quiz-dead" placeholder="e.g. td.end-date">
+      </div>
+      <div class="selector-field">
+        <label for="sel-gdb-rows">GDB Rows</label>
+        <input type="text" id="sel-gdb-rows" placeholder="e.g. table.GDBTable tr">
+      </div>
+      <div class="selector-field">
+        <label for="sel-gdb-dead">GDB Deadline</label>
+        <input type="text" id="sel-gdb-dead" placeholder="e.g. td.due-date">
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Save / Reset ────────────────────────────────────────────────────── -->
+  <div class="save-bar">
+    <div style="display:flex;gap:10px;align-items:center">
+      <button class="btn-save" id="btn-save">Save Settings</button>
+      <button class="btn-reset" id="btn-reset">Reset to Defaults</button>
+    </div>
+    <span class="save-status hidden" id="save-status">✓ Saved!</span>
+  </div>
+
+</div><!-- /.page-wrapper -->
+
+<script src="options.js"></script>
+</body>
+</html>

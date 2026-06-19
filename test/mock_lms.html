@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VULMS Mock — My Courses Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; color: #333; margin: 0; }
+    .lms-header { background: #003366; color: #fff; padding: 14px 24px; display: flex; align-items: center; gap: 16px; }
+    .lms-header h1 { font-size: 18px; margin: 0; }
+    .lms-nav { background: #004080; padding: 0 24px; display: flex; gap: 0; }
+    .lms-nav a { color: #cce0ff; padding: 10px 18px; text-decoration: none; font-size: 13px; display: block; }
+    .lms-nav a:hover, .lms-nav a.active { background: #0059b3; color: #fff; }
+    .content { max-width: 1000px; margin: 24px auto; padding: 0 16px; }
+    h2 { font-size: 16px; font-weight: bold; border-bottom: 2px solid #003366; padding-bottom: 6px; margin-bottom: 12px; color: #003366; }
+    table { width: 100%; border-collapse: collapse; background: #fff; margin-bottom: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    th { background: #003366; color: #fff; padding: 10px 12px; text-align: left; font-size: 13px; }
+    td { padding: 9px 12px; border-bottom: 1px solid #e0e0e0; font-size: 13px; vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f0f7ff; }
+    .status-pending   { color: #c07800; font-weight: bold; }
+    .status-submitted { color: #1a7a1a; font-weight: bold; }
+    .status-open      { color: #0055aa; font-weight: bold; }
+    a { color: #003366; }
+    .course-badge { background: #003366; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<!-- LMS Header (mimicking VULMS style) -->
+<div class="lms-header">
+  <img src="https://via.placeholder.com/36x36/ffffff/003366?text=VU" alt="VU" style="border-radius:4px">
+  <h1>Virtual University of Pakistan — Learning Management System</h1>
+</div>
+<nav class="lms-nav">
+  <a href="#" class="active">Dashboard</a>
+  <a href="#">My Courses</a>
+  <a href="#">Assignments</a>
+  <a href="#">Quizzes</a>
+  <a href="#">GDB</a>
+  <a href="#">Messages</a>
+</nav>
+
+<div class="content">
+
+  <!-- ── Assignments Table ──────────────────────────────────────────────── -->
+  <h2>📝 Assignments</h2>
+  <table id="assignment-table">
+    <thead>
+      <tr>
+        <th>Course</th>
+        <th>Title</th>
+        <th>Posted Date</th>
+        <th>Due Date</th>
+        <th>Max Marks</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="course-badge">CS301</span></td>
+        <td><a href="https://vulms.vu.edu.pk/Assignment/ListAssignments.aspx?cid=123">Data Structures Assignment 2</a></td>
+        <td>15-Jun-2026</td>
+        <td>28-Jun-2026 11:59 PM</td>
+        <td>20</td>
+        <td class="status-pending">Pending</td>
+        <td><a href="#">Upload</a></td>
+      </tr>
+      <tr>
+        <td><span class="course-badge">CS401</span></td>
+        <td><a href="https://vulms.vu.edu.pk/Assignment/ListAssignments.aspx?cid=124">Operating Systems Lab Report</a></td>
+        <td>10-Jun-2026</td>
+        <td>19-Jun-2026 11:59 PM</td>
+        <td>30</td>
+        <td class="status-pending">Pending</td>
+        <td><a href="#">Upload</a></td>
+      </tr>
+      <tr>
+        <td><span class="course-badge">MGT501</span></td>
+        <td><a href="https://vulms.vu.edu.pk/Assignment/ListAssignments.aspx?cid=125">Human Resource Management Case Study</a></td>
+        <td>01-Jun-2026</td>
+        <td>10-Jun-2026 11:59 PM</td>
+        <td>20</td>
+        <td class="status-submitted">Submitted</td>
+        <td><a href="#">View Feedback</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Quizzes Table ──────────────────────────────────────────────────── -->
+  <h2>📋 Quizzes</h2>
+  <table id="quiz-table">
+    <thead>
+      <tr>
+        <th>Course</th>
+        <th>Title</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Duration</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="course-badge">CS301</span></td>
+        <td><a href="https://vulms.vu.edu.pk/Quiz/ListQuizzes.aspx?cid=123">Quiz 3 — Trees and Graphs</a></td>
+        <td>18-Jun-2026</td>
+        <td>20-Jun-2026 11:59 PM</td>
+        <td>30 min</td>
+        <td class="status-open">Open</td>
+        <td><a href="#">Start Quiz</a></td>
+      </tr>
+      <tr>
+        <td><span class="course-badge">ENG201</span></td>
+        <td><a href="https://vulms.vu.edu.pk/Quiz/ListQuizzes.aspx?cid=126">Business Communication Quiz 2</a></td>
+        <td>17-Jun-2026</td>
+        <td>19-Jun-2026 05:00 PM</td>
+        <td>20 min</td>
+        <td class="status-pending">Pending</td>
+        <td><a href="#">Start Quiz</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── GDB Table ───────────────────────────────────────────────────────── -->
+  <h2>💬 Graded Discussion Boards (GDB)</h2>
+  <table id="gdb-table">
+    <thead>
+      <tr>
+        <th>Course</th>
+        <th>Topic</th>
+        <th>Opening Date</th>
+        <th>Closing Date</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="course-badge">CS401</span></td>
+        <td><a href="https://vulms.vu.edu.pk/GDB/ListGDB.aspx?cid=124">Discuss advantages of microkernel architecture in modern OS</a></td>
+        <td>15-Jun-2026</td>
+        <td>25-Jun-2026 11:59 PM</td>
+        <td class="status-open">Open</td>
+        <td><a href="#">Post Reply</a></td>
+      </tr>
+      <tr>
+        <td><span class="course-badge">MGT501</span></td>
+        <td><a href="https://vulms.vu.edu.pk/GDB/ListGDB.aspx?cid=125">Impact of remote work on organizational culture GDB</a></td>
+        <td>05-Jun-2026</td>
+        <td>18-Jun-2026 11:59 PM</td>
+        <td class="status-submitted">Replied</td>
+        <td><a href="#">View</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div><!-- /.content -->
+
+<script>
+  // Simulate a note in console to confirm the page is recognized by the parser
+  console.log('[VU Mock LMS] Page loaded — content.js should detect this page.');
+</script>
+
+</body>
+</html>
