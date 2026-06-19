@@ -1,0 +1,2 @@
+# This directory holds the SQLite database file (notifier.db).
+# The database file itself is gitignored — only this placeholder is committed.

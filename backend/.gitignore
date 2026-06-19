@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Secrets — NEVER commit
+.env
+
+# SQLite database (contains encrypted student credentials + item state)
+data/*.db
+data/*.db-shm
+data/*.db-wal
+
+# Playwright screenshot output
+*.png
+
+# Logs
+*.log
+logs/

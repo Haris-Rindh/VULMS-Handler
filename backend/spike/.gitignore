@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Credentials — NEVER commit
+.env
+
+# Playwright output
+spike-screenshot.png
+
+# Playwright browser binaries (downloaded by npx playwright install)
+# These live in ~/.cache/ms-playwright, not here, but just in case:
+.playwright/

@@ -1,0 +1,13 @@
+{
+  "name": "vu-lms-notifier-spike",
+  "version": "1.0.0",
+  "description": "Playwright login spike for VU LMS",
+  "main": "login-test.js",
+  "scripts": {
+    "spike": "node login-test.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "playwright": "^1.44.0"
+  }
+}
